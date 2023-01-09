@@ -169,6 +169,7 @@ const LearnerAccess = ({
       case TabKey.Current:
         return (
           <LoadUserLearning
+            status='not-started'
             query={query}
             kind={['courseGroup', 'article', 'video', 'shareableContentObject', 'xApiObject']}
           />
@@ -186,6 +187,7 @@ const LearnerAccess = ({
       case TabKey.Completed:
         return (
           <LoadUserLearning
+            status="completed"
             query={query}
             kind={[
               'learningPath',

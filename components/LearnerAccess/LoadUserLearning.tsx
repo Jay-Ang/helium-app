@@ -14,7 +14,7 @@ import LearnerAccessGridView from './Views/GridView';
 import LearnerAccessDisplayListView from './Views/DisplayListView';
 import clsx from 'clsx';
 
-const LoadUserLearning = ({ query, kind, sort }: LoadedComponentProps): JSX.Element => {
+const LoadUserLearning = ({ query, kind, sort, status }: LoadedComponentProps): JSX.Element => {
   const [gridViewActive, setGridActive] = useState(true);
 
   const handleResize = () => {
@@ -63,6 +63,15 @@ const LoadUserLearning = ({ query, kind, sort }: LoadedComponentProps): JSX.Elem
 
   if (!data || !data.UserContentItems) return <></>;
 
+  switch (status) {
+    case 'completed':
+      data.UserContentItems = data?.UserContentItems.filter(item => item.availabilityStatus === 'completed');
+      break;
+    case 'not-started':
+      data.UserContentItems = data?.UserContentItems.filter(item => item.availabilityStatus === 'not-started');
+      break;
+  }
+
   return (
     <>
       {/* grid/list toggle */}
@@ -107,9 +116,7 @@ const LoadUserLearning = ({ query, kind, sort }: LoadedComponentProps): JSX.Elem
 
         {data.UserContentItems.map(item => {
           const hydratedItem = hydrateContent(i18n, item);
-          if (hydratedItem.isCompleted) {
-            return null;
-          }
+
           return (
             <>
               {gridViewActive ? (

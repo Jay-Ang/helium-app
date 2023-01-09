@@ -25,6 +25,7 @@ export interface LoadedComponentProps {
   query?: string;
   kind?: string[];
   sort?: string;
+  status?: string;
 }
 
 export type LearnerAccessContextType = {
