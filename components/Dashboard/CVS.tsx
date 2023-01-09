@@ -7,26 +7,26 @@ const CVS = ({ currentUser }:any) => {
       title: 'FOUNDATIONAL PREP',
       query: 'tags:"cm premium level setting"'
     },
-    // {
-    //   title: 'DATA LITERACY',
-    //   query: 'tags:"cm premium level 1 data literacy"'
-    // },
-    // {
-    //   title: 'CUSTOMER INSIGHTS',
-    //   query: 'tags:"cm premium level 1 customer insights"'
-    // },
-    // {
-    //   title: 'CREATIVE DEVELOPMENT',
-    //   query: 'tags:"cm premium level 1 creative development"'
-    // },
-    // {
-    //   title: 'MARKETING CHANNELS',
-    //   query: 'tags:"cm premium level 1 marketing channels"'
-    // },
-    // {
-    //   title: 'MEASUREMENT AND ANALYTICS',
-    //   query: 'tags:"cm premium level 1 measurement and analytics"'
-    // }
+    {
+      title: 'DATA LITERACY',
+      query: 'tags:"cm premium level 1 data literacy"'
+    },
+    {
+      title: 'CUSTOMER INSIGHTS',
+      query: 'tags:"cm premium level 1 customer insights"'
+    },
+    {
+      title: 'CREATIVE DEVELOPMENT',
+      query: 'tags:"cm premium level 1 creative development"'
+    },
+    {
+      title: 'MARKETING CHANNELS',
+      query: 'tags:"cm premium level 1 marketing channels"'
+    },
+    {
+      title: 'MEASUREMENT AND ANALYTICS',
+      query: 'tags:"cm premium level 1 measurement and analytics"'
+    }
   ]
 
   return (
