@@ -29,7 +29,8 @@ const LearnerAccess = ({
   query,
   userHasManagerInterfaceAccess,
   companyEnableExternalCertificateUploads,
-  companyHasWaitlistingFeature
+  companyHasWaitlistingFeature,
+  title
 }: LearnerAccessProps): JSX.Element => {
   const [activeTabKey, setActiveTabKey] = useState<TabKey | undefined>(undefined);
   const [availableTabs, setAvailableTabs] = useState<AvailableTab[]>([]);
@@ -231,7 +232,7 @@ const LearnerAccess = ({
     >
       {/* title */}
       <div className="pt-16 px-10 pb-20">
-        <div className="text-2xl font-bold font-header">Activity</div>
+        <div className="text-2xl font-bold font-header">{title}</div>
         <div className="max-w-none w-auto text-slate-700 text-black-light text-sm">
           <div className="">
             {dashboardAccessTabs}
