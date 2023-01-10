@@ -13,6 +13,7 @@ import { useTranslation } from 'react-i18next';
 import LearnerAccessGridView from './Views/GridView';
 import LearnerAccessDisplayListView from './Views/DisplayListView';
 import clsx from 'clsx';
+import { gql, useQuery } from '@apollo/client';
 
 const LoadUserLearning = ({ query, kind, sort, status }: LoadedComponentProps): JSX.Element => {
   const [gridViewActive, setGridActive] = useState(true);
@@ -27,14 +28,43 @@ const LoadUserLearning = ({ query, kind, sort, status }: LoadedComponentProps): 
     window.addEventListener('resize', handleResize);
   }, []);
 
-  const { data, loading, error } = useUserContentItemsQuery({
-    variables: {
-      query,
-      kind,
-      sort
-    },
-    fetchPolicy: 'network-only'
-  });
+  let { data, loading, error } = useQuery(gql`
+    query($query: String, $sort: String){
+      UserContentItems (query: $query, sort: $sort) {
+        asset
+        title
+        sessionTitle
+        kind
+        id
+        slug
+        meetingStartDate
+        contentTypeLabel
+        availabilityStatus
+        courseStartDate
+        courseEndDate
+        coursePresold
+        description
+        displayCourse
+        displayCourseSlug
+        displayDate
+        courseGracePeriodEnded
+        authors
+        publishDate
+        source
+        expiresAt
+        currentUserMayReschedule
+        timeZone
+        embeddedEnabled
+        currentUserUnmetCoursePrerequisites
+        currentUserUnmetLearningPathPrerequisites
+        hasChildren
+        hideCourseDescription
+        isActive
+        waitlistingEnabled
+        waitlistingTriggered
+      }
+    }
+  `, { variables: { query, sort }});
 
   const { i18n } = useTranslation();
 
@@ -63,12 +93,14 @@ const LoadUserLearning = ({ query, kind, sort, status }: LoadedComponentProps): 
 
   if (!data || !data.UserContentItems) return <></>;
 
+  let userContentItems;
+
   switch (status) {
     case 'completed':
-      data.UserContentItems = data?.UserContentItems.filter(item => item.availabilityStatus === 'completed');
+      userContentItems = data?.UserContentItems.filter(item => item.availabilityStatus === 'completed');
       break;
     case 'not-started':
-      data.UserContentItems = data?.UserContentItems.filter(item => item.availabilityStatus === 'not-started');
+      userContentItems = data?.UserContentItems.filter(item => item.availabilityStatus === 'not-started');
       break;
   }
 
@@ -114,7 +146,7 @@ const LoadUserLearning = ({ query, kind, sort, status }: LoadedComponentProps): 
           </div>
         )}
 
-        {data.UserContentItems.map(item => {
+        {userContentItems.map(item => {
           const hydratedItem = hydrateContent(i18n, item);
 
           return (
