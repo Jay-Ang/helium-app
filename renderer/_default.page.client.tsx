@@ -23,7 +23,8 @@ async function hydrate() {
     currentUser,
     isProduction,
     queryParams,
-    authToken
+    authToken,
+    routeParams
   } = pageContext;
 
   const apolloClient = await makeApolloClient(
@@ -46,6 +47,7 @@ async function hydrate() {
             appearance={appearance}
             currentUser={currentUser}
             queryParams={queryParams}
+            routeParams={routeParams}
           />
         </PageWrapper>
       </I18nextProvider>

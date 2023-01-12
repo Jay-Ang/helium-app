@@ -23,7 +23,8 @@ export const passToClient = [
   'currentUser',
   'isProduction',
   'queryParams',
-  'authToken'
+  'authToken',
+  'routeParams'
 ];
 
 async function render(pageContext: PageContext) {
